@@ -1,5 +1,7 @@
 <template>
-  <div>home</div>
+  <default-layout />
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { DefaultLayout } from '@/layouts'
+</script>
