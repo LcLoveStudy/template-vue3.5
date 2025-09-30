@@ -3,8 +3,10 @@
     <div class="default-layout__header">
       <default-layout-header />
     </div>
-    <div class="default-layout__content" :class="{ fold: menuFlod }">
-      <div class="default-layout__content__left"></div>
+    <div class="default-layout__content" :class="{ fold: isFolded }">
+      <div class="default-layout__content__left">
+        <default-layout-aside />
+      </div>
       <div class="default-layout__content__right">
         <router-view></router-view>
       </div>
@@ -13,10 +15,10 @@
 </template>
 
 <script setup lang="ts">
-import { DefaultLayoutHeader } from './components'
+import { DefaultLayoutHeader, DefaultLayoutAside } from './components'
 import { useLayoutStore } from '@/stores'
 import { storeToRefs } from 'pinia'
-const { menuFlod } = storeToRefs(useLayoutStore())
+const { isFolded } = storeToRefs(useLayoutStore())
 </script>
 
 <style scoped lang="less">
@@ -29,11 +31,13 @@ const { menuFlod } = storeToRefs(useLayoutStore())
   &__content {
     display: grid;
     grid-template-columns: 15rem 1fr;
+    transition: all 0.3s ease-in-out;
+    // 折叠状态的侧边栏样式
     &.fold {
       grid-template-columns: 5rem 1fr;
     }
     &__left {
-      background-color: #e0e0e0;
+      background-color: @default-layout-aside-background-color;
     }
     &__right {
       background-color: #d0d0d0;
