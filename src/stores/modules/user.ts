@@ -2,6 +2,8 @@ import { defineStore } from 'pinia'
 import { getUserInfoApi, userLoginApi, type LoginFormType, type UserInfoType } from '@/api'
 import { useLocalStorage } from '@/hooks'
 import { LocalStorageKeys } from '@/enums/localstorage'
+import { clearStores } from '@/stores'
+import router from '@/router'
 
 /** 用户信息仓库 */
 export const useUserStore = defineStore('user', () => {
@@ -22,6 +24,12 @@ export const useUserStore = defineStore('user', () => {
       token.value = data.token
       return data
     })
+  }
+
+  /** 登出 */
+  const useLogout = async () => {
+    clearStores()
+    router.replace('/login')
   }
 
   /** 获取用户信息 */
@@ -48,5 +56,5 @@ export const useUserStore = defineStore('user', () => {
     }
   }
 
-  return { token, userInfo, userLogin, getUserInfo, clearStore }
+  return { token, userInfo, userLogin, useLogout, getUserInfo, clearStore }
 })

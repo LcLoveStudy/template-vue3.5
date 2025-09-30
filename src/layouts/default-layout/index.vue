@@ -1,6 +1,8 @@
 <template>
   <div class="default-layout">
-    <div class="default-layout__header"></div>
+    <div class="default-layout__header">
+      <default-layout-header />
+    </div>
     <div class="default-layout__content" :class="{ fold: menuFlod }">
       <div class="default-layout__content__left"></div>
       <div class="default-layout__content__right">
@@ -11,20 +13,19 @@
 </template>
 
 <script setup lang="ts">
+import { DefaultLayoutHeader } from './components'
 import { useLayoutStore } from '@/stores'
 import { storeToRefs } from 'pinia'
 const { menuFlod } = storeToRefs(useLayoutStore())
 </script>
 
 <style scoped lang="less">
+@import url('@/assets/style/variables.less');
 .default-layout {
   height: 100vh;
   display: grid;
-  grid-template-rows: 4rem 1fr;
+  grid-template-rows: @default-layout-header-height 1fr;
   grid-template-columns: 1fr;
-  &__header {
-    background-color: #f5f5f5;
-  }
   &__content {
     display: grid;
     grid-template-columns: 15rem 1fr;
