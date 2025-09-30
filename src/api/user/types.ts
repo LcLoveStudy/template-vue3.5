@@ -1,3 +1,4 @@
+import asyncComponentMap from '@/router/asyncComponentMap'
 /** 登录表单类型 */
 export type LoginFormType = {
   userCode: string
@@ -16,10 +17,11 @@ export type UserInfoType = {
   userName: string //用户名
 }
 
+/** 异步路由接口返回的数据类型 */
 export type AsyncRouterItemType = {
   children: AsyncRouterItemType[]
-  component: string
-  hidden: string
+  component: keyof typeof asyncComponentMap
+  hidden: boolean
   icon: string
   id: string
   menuCode: number
