@@ -28,7 +28,10 @@ export const getUserInfoApi = () => {
   })
 }
 
-/** 获取当前用户菜单 */
+/**
+ * 获取当前用户菜单
+ * @param organizationId 组织id
+ */
 export const getUserMenusApi = (organizationId: string) => {
   return http.get<ApiResponseType<AsyncRouterItemType[]>>({
     url: '/menu/queryRoutingMenuTree',

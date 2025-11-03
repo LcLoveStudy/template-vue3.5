@@ -1,7 +1,7 @@
 import { getUserMenusApi } from '@/api'
 import { defineStore } from 'pinia'
 import { useUserStore } from './user'
-import { generateAsyncRouters } from '@/utils/router-loader'
+import { buildSystemRoutes } from '@/utils/router-loader'
 import router from '@/router'
 import type { RouteRecordRaw } from 'vue-router'
 
@@ -14,27 +14,16 @@ export const useRouterStore = defineStore('router', () => {
   const getAsyncRouters = async () => {
     const { userInfo } = useUserStore()
     if (!userInfo.companyId) return
-    return getUserMenusApi(userInfo.companyId).then(({ data }) => {
-      asyncRouters.value = [
-        {
-          path: '/home',
-          meta: {
-            title: '发布管理',
-            icon: 'HomeFilled',
-          },
-          component: () => import('@/views/system/home/index.vue'),
-        },
-        ...generateAsyncRouters(data),
-      ]
-      let systemRoutes = {
-        path: '/',
-        redirect: '/home',
-        component: () => import('@/layouts/default-layout/index.vue'),
-        children: asyncRouters.value,
-      }
-      // addRoute方法只能接收RouteRecordRaw类型，只能断言成RouteRecordRaw
-      router.addRoute(systemRoutes as RouteRecordRaw)
-    })
+    const { data } = await getUserMenusApi(userInfo.companyId)
+    asyncRouters.value = buildSystemRoutes(data)
+    let systemRoutes = {
+      path: '/',
+      redirect: '/home',
+      component: () => import('@/layouts/default-layout/index.vue'),
+      children: asyncRouters.value,
+    }
+    // addRoute方法只能接收RouteRecordRaw类型，只能断言成RouteRecordRaw
+    router.addRoute(systemRoutes as RouteRecordRaw)
   }
 
   /** 清空仓库数据 */
