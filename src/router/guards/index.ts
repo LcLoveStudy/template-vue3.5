@@ -13,10 +13,10 @@ export const setupRouterGuards = (router: Router) => {
         await getUserInfo()
         const { getAsyncRouters } = useRouterStore()
         await getAsyncRouters()
-        next()
+        return next({ ...to, replace: true })
       } catch (err) {
         ElMessage.error('获取用户信息失败，请重新登录')
-        next('/login')
+        return next('/login')
       }
     } else {
       return next()

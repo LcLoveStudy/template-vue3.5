@@ -49,7 +49,7 @@ export default defineConfig({
     open: true,
     proxy: {
       '/nursingworkers': {
-        target: 'http://172.16.31.110:1203', //陈
+        target: 'http://172.16.31.108:1203', //陈
         ws: true,
         changeOrigin: true,
       },

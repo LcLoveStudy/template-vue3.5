@@ -16,10 +16,14 @@ export const useRouterStore = defineStore('router', () => {
     if (!userInfo.companyId) return
     return getUserMenusApi(userInfo.companyId).then(({ data }) => {
       asyncRouters.value = generateAsyncRouters(data)
-      asyncRouters.value.forEach((route) => {
-        // addRoute方法只能接收只能断言成RouteRecordRaw类型，只能断言成RouteRecordRaw
-        router.addRoute(route as RouteRecordRaw)
-      })
+      let systemRoutes = {
+        path: '/',
+        redirect: '/home',
+        component: () => import('@/views/system/index.vue'),
+        children: asyncRouters.value,
+      }
+      // addRoute方法只能接收RouteRecordRaw类型，只能断言成RouteRecordRaw
+      router.addRoute(systemRoutes as RouteRecordRaw)
     })
   }
 
