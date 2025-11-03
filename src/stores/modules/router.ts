@@ -1,7 +1,7 @@
 import { getUserMenusApi } from '@/api'
 import { defineStore } from 'pinia'
 import { useUserStore } from './user'
-import { generateAsyncRouters } from '@/utils/router'
+import { generateAsyncRouters } from '@/utils/router-loader'
 import router from '@/router'
 import type { RouteRecordRaw } from 'vue-router'
 
@@ -22,7 +22,7 @@ export const useRouterStore = defineStore('router', () => {
             title: '发布管理',
             icon: 'HomeFilled',
           },
-          component: () => import('@/views/system/index.vue'),
+          component: () => import('@/views/system/home/index.vue'),
         },
         ...generateAsyncRouters(data),
       ]

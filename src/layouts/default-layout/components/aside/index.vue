@@ -2,7 +2,7 @@
   <div class="default-layout-aside">
     <!-- 菜单项 -->
     <div class="menu">
-      <el-menu :collapse="isFolded" router>
+      <el-menu :collapse="isFolded" router :default-active="currentMenu">
         <MenuItem v-for="item in asyncRouters" :key="item.path" :menu="item" />
       </el-menu>
     </div>
@@ -24,10 +24,19 @@ import { storeToRefs } from 'pinia'
 const { isFolded } = storeToRefs(useLayoutStore())
 const { asyncRouters } = storeToRefs(useRouterStore())
 const { toggleFolded } = useLayoutStore()
+const currentMenu = ref('')
+const route = useRoute()
 
 /** 计算图标 */
 const foldIcon = computed(() => {
   return isFolded.value ? ArrowRight : ArrowLeft
+})
+
+/** 监听路由，动态更新当前高亮 */
+watchEffect(() => {
+  if (route && route.path) {
+    currentMenu.value = route.path
+  }
 })
 </script>
 

@@ -41,6 +41,7 @@ const { isFolded } = storeToRefs(useLayoutStore())
     }
     &__right {
       background-color: #d0d0d0;
+      padding: 1rem;
     }
   }
 }

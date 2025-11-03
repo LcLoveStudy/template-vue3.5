@@ -11,15 +11,14 @@ import { useTitle } from '@/hooks'
 import { ConstEnums } from '@/enums/const-enums'
 const route = useRoute()
 const title = useTitle('')
-watch(
-  () => route.path,
-  () => {
+
+watchEffect(() => {
+  if (route.meta.title) {
     title.value = `${route.meta.title} - ${ConstEnums.PROJECT_NAME}`
-  },
-  {
-    immediate: true,
-  },
-)
+  } else {
+    title.value = ConstEnums.PROJECT_NAME
+  }
+})
 </script>
 
 <style lang="scss" scoped>
