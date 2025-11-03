@@ -1,0 +1,39 @@
+@import url('@/assets/style/variables.less');
+:deep(.el-sub-menu__title, .el-menu-item) {
+  font-weight: 400 !important;
+  font-size: 14px !important;
+  height: 40px !important;
+  &:hover {
+    color: var(--el-menu-active-color);
+    background-color: @default-layout-aside-background-color;
+  }
+}
+:deep(.el-menu-item.is-active) {
+  background-color: var(--el-menu-hover-bg-color);
+}
+
+:deep(.el-menu--inline .el-menu-item, .el-menu--inline .el-sub-menu__title) {
+  text-indent: 14px !important;
+  height: 40px !important;
+}
+
+:deep(.el-menu--collapse) {
+  width: 100%;
+}
+:deep(.el-menu) {
+  background-color: transparent;
+}
+:deep(.el-menu--vertical:not(.el-menu--collapse):not(.el-menu--popup-container) .el-menu-item) {
+  font-weight: 400 !important;
+  font-size: 14px !important;
+  height: 40px !important;
+  &:hover {
+    color: var(--el-menu-active-color);
+    background-color: @default-layout-aside-background-color;
+  }
+}
+:deep(
+  .el-menu--vertical:not(.el-menu--collapse):not(.el-menu--popup-container) .el-menu-item.is-active
+) {
+  background-color: var(--el-menu-hover-bg-color) !important;
+}

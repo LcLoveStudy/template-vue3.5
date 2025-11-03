@@ -22,7 +22,7 @@ export type AsyncRouterItemType = {
   children: AsyncRouterItemType[]
   component: keyof typeof asyncComponentMap
   hidden: boolean
-  icon: string
+  icon: ElementPlusIconName
   id: string
   menuCode: number
   meta: {

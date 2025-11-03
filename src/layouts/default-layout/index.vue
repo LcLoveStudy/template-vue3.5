@@ -30,7 +30,7 @@ const { isFolded } = storeToRefs(useLayoutStore())
   grid-template-columns: 1fr;
   &__content {
     display: grid;
-    grid-template-columns: 15rem 1fr;
+    grid-template-columns: 240px 1fr;
     transition: all 0.3s ease-in-out;
     // 折叠状态的侧边栏样式
     &.fold {

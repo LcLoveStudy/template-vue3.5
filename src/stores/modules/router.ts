@@ -15,11 +15,21 @@ export const useRouterStore = defineStore('router', () => {
     const { userInfo } = useUserStore()
     if (!userInfo.companyId) return
     return getUserMenusApi(userInfo.companyId).then(({ data }) => {
-      asyncRouters.value = generateAsyncRouters(data)
+      asyncRouters.value = [
+        {
+          path: '/home',
+          meta: {
+            title: '发布管理',
+            icon: 'HomeFilled',
+          },
+          component: () => import('@/views/system/index.vue'),
+        },
+        ...generateAsyncRouters(data),
+      ]
       let systemRoutes = {
         path: '/',
         redirect: '/home',
-        component: () => import('@/views/system/index.vue'),
+        component: () => import('@/layouts/default-layout/index.vue'),
         children: asyncRouters.value,
       }
       // addRoute方法只能接收RouteRecordRaw类型，只能断言成RouteRecordRaw
