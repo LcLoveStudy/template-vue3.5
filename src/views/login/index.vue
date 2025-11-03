@@ -35,11 +35,12 @@
 import type { LoginFormType } from '@/api'
 import { ConstEnums } from '@/enums/const-enums'
 import type { FormInstance, FormRules } from 'element-plus'
-import { useUserStore } from '@/stores'
+import { useUserStore, clearStores } from '@/stores'
 const { userLogin } = useUserStore()
 
 onMounted(() => {
   // 每次进入到登录页面时清除本地存储
+  clearStores()
   localStorage.clear()
 })
 
